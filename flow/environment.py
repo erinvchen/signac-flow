@@ -400,13 +400,6 @@ class PBSEnvironment(ComputeEnvironment):
     template = "pbs.sh"
 
 
-class SlurmEnvironment(ComputeEnvironment):
-    """An environment with SLURM scheduler."""
-
-    scheduler_type = SlurmScheduler
-    template = "slurm.sh"
-
-
 class LSFEnvironment(ComputeEnvironment):
     """An environment with LSF scheduler."""
 
@@ -454,8 +447,11 @@ class DefaultTorqueEnvironment(DefaultPBSEnvironment):  # noqa: D101
     pass
 
 
-class DefaultSlurmEnvironment(SlurmEnvironment):
+class DefaultSlurmEnvironment(ComputeEnvironment):
     """Default environment for clusters with a SLURM scheduler."""
+
+    scheduler_type = SlurmScheduler
+    template = "slurm.sh"
 
     @classmethod
     def add_args(cls, parser):
