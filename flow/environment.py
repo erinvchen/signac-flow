@@ -414,15 +414,7 @@ class LSFEnvironment(ComputeEnvironment):
     template = "lsf.sh"
 
 
-class NodesEnvironment(ComputeEnvironment):
-    """A compute environment consisting of multiple compute nodes.
-
-    Each compute node is assumed to have a specific number of compute units,
-    e.g., CPUs.
-    """
-
-
-class DefaultPBSEnvironment(NodesEnvironment, PBSEnvironment):
+class DefaultPBSEnvironment(PBSEnvironment):
     """Default environment for clusters with a PBS scheduler."""
 
     @classmethod
@@ -462,7 +454,7 @@ class DefaultTorqueEnvironment(DefaultPBSEnvironment):  # noqa: D101
     pass
 
 
-class DefaultSlurmEnvironment(NodesEnvironment, SlurmEnvironment):
+class DefaultSlurmEnvironment(SlurmEnvironment):
     """Default environment for clusters with a SLURM scheduler."""
 
     @classmethod
@@ -487,7 +479,7 @@ class DefaultSlurmEnvironment(NodesEnvironment, SlurmEnvironment):
         )
 
 
-class DefaultLSFEnvironment(NodesEnvironment, LSFEnvironment):
+class DefaultLSFEnvironment(LSFEnvironment):
     """Default environment for clusters with a LSF scheduler."""
 
     @classmethod
